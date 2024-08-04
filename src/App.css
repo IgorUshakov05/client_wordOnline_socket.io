@@ -1,38 +1,111 @@
-.App {
-  text-align: center;
+.app {
+  width: 90%;
+  background-color: #F1F4F8;
+  height: fit-content;
+  margin: auto;
+  border-radius: 24px 24px 0 0;
+  min-height: 100%;
+  position: relative;
+  padding: 35px 30px;
+  margin-top: 84px;
+  max-width: 1270px;
+  overflow: hidden;
+}
+.titleFileInput {
+  border: none;
+  outline: none;
+  font-size: 20px;
+  font-weight: 700;
+  color:#C9CDD9;
+  letter-spacing: 1px;
+  width: 100%;
+}
+.titleFileInput:focus {
+  color: black;
+}
+.inputTitle {
+  padding: 25px 40px;
+  border-bottom: 1px solid #C9CDD9;
+}
+.selectMethod {
+  width:30px;
+  cursor: pointer;
+}
+.selectMethod:hover,.active {
+  background-color:#c9cdd93b !important;
+}
+.someText {
+  background-color: #FFFFFF;
+  border-radius: 15px;
+  margin: auto;
+  margin-top: 30px;
+  position: absolute;
+  height: fit-content;
+  max-height: 100vh;
+  height: 70vh;
+  bottom: 0;
+  overflow-y: scroll;
+  top: 94px;
+  left: 25px;
+  box-sizing: border-box;
+  right: 25px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.someText::-webkit-scrollbar-thumb{
+  width: 1px;
+  background: red;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+.MainText {
+  padding: 25px 40px;
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+}
+.public-DraftEditorPlaceholder-inner {
+  color: #C9CDD9;
+}
+.editPanel {
+  width: 100%;
+  background-color:#FFFFFF;
+  border-radius:15px;
+  height: 55px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding:0 25px;
+  flex-direction: row;
+  align-items:center;
+  margin: auto;
+}
+.elemEditer {
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+}
+.line {
+  width: 2px;
+  height: 80%;
+  border-radius: 4px;
+  background-color: #C9CDD9;
+}
+.searchLine {
+  margin-left: 20px;
+  width: 100%;
+}
+.findText {
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color:black;
+  width: 100%;
+}
+.findText::placeholder, .titleFileInput::placeholder {
+  color: #C9CDD9;
+}
+.elemEditer > div {
+  display: flex;
+  width: 52px;
+  height: 40px;
+  border-radius:4px;
+  background-color: white;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  align-items:center;
+  margin-right: 36px;
 }

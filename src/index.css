@@ -1,13 +1,50 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-color: #EAEDF0;
+}
+body, html,#root {
+  height: 100%;
+  overflow: hidden;
+}
+.myBulletListStyle {
+  margin-left: 20px;
+  list-style-type: disc;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.myNumberListStyle {
+  margin-left: 20px;
+  list-style-type: decimal;
+}
+
+* {
+  margin: 0;
+  transition: 0.2s ease;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: 'Ubuntu';
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('./assetss/font/Ubuntu-Regular.ttf');
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('./assetss/font/Ubuntu-Bold.ttf');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('./assetss/font/Ubuntu-Light.ttf');
+  font-weight: 300;
+}
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('./assetss/font/Ubuntu-BoldItalic.ttf');
+  font-weight: 650;
+}
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('./assetss/font/Ubuntu-LightItalic.ttf');
+  font-weight: 250;
 }
