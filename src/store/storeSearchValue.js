@@ -1,24 +1,32 @@
-import { makeObservable, observable, action } from "mobx"
+import { makeObservable, observable, action } from "mobx";
 
 class InputSearch {
-    value = ""
+  value = "";
+  ref = null;
+  constructor() {
+    makeObservable(this, {
+      value: observable,
+      ref: observable,
+      setValue: action,
+      setRef: action,
+    });
+  }
 
-    constructor(value = "") {
-        makeObservable(this, {
-            value: observable,
-            setValue: action,
-        })
-        this.value = value
-    }
+  setValue(value) {
+    this.value = value; // устанавливаем новое значение
+  }
 
-    setValue(value) {
-        this.value = value // устанавливаем новое значение
-    }
+  get getValue() {
+    return this.value; // геттер
+  }
 
-    get getValue() {
-        return this.value // геттер
-    }
+  getRef() {
+    return this.ref;
+  }
+  setRef(ref) {
+    this.ref = ref;
+  }
 }
 
-const inputSearch = new InputSearch()
-export default inputSearch
+const inputSearch = new InputSearch();
+export default inputSearch;

@@ -3,7 +3,7 @@ function EditStyle() {
   return (
     <div className="elemEditer">
       <SetStyle
-        id={"bold"}
+        id={"BOLD"}
         children={
           <svg
             width="20"
@@ -20,7 +20,7 @@ function EditStyle() {
         }
       />
       <SetStyle
-        id={"underLine"}
+        id={"UNDERLINE"}
         children={
           <svg
             width="20"
@@ -38,7 +38,7 @@ function EditStyle() {
         }
       />
       <SetStyle
-        id={"list"}
+        id={"LIST"}
         children={
           <svg
             width="20"
@@ -58,7 +58,7 @@ function EditStyle() {
         }
       />
       <SetStyle
-        id={"link"}
+        id={"LINK"}
         children={
           <svg
             width="39"

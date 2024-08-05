@@ -15,6 +15,7 @@ class InputValueTitle {
 
   setValue(value) {
     this.title = value;
+    localStorage.setItem('title', value)
   }
 
   setRef(ref) {
@@ -26,7 +27,7 @@ class InputValueTitle {
   }
 
   getValue() {
-    return this.title;
+    return localStorage.getItem('title');
   }
 }
 

@@ -1,17 +1,70 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import { Editor, EditorState, RichUtils } from "draft-js";
+import { useHotkeys } from "react-hotkeys-hook";
+import {
+  Editor,
+  EditorState,
+  RichUtils,
+  convertToRaw,
+  convertFromRaw,
+} from "draft-js";
 import EditPanel from "./components/ui/editPanel";
 import inputValueTitle from "./store/storeTitleValue";
+import activeState from "./store/storeActiveButton";
 import loginAuth from "./store/authData";
-import { observer } from "mobx-react-lite";
 import TitleDocument from "./components/inputs/titleDoc";
-import typemethod from "./store/storeActiveButton";
+import searchState from "./store/storeSearchValue";
 
-const App = observer(() => {
+const App = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  //  Сохранение  содержимого  редактора
+  const saveEditorContent = (data) => {
+    localStorage.setItem("editorData", JSON.stringify(data));
+  };
+  
+  //  Изменение  состояния  редактора
+  const change = (newEditorState) => {
+    setEditorState(newEditorState);
+    const raw = convertToRaw(newEditorState.getCurrentContent());
+    saveEditorContent(raw);
+  };
+  
+  //  Изменение  стиля
+  const toggleInlineStyle = () => {
+    console.log(activeState.getValue())
+    change(RichUtils.toggleInlineStyle(editorState, activeState.getValue()));
+  };
 
+  //  Получение  сохраненного  содержимого
+  const getSavedEditorData = () => {
+    const savedData = localStorage.getItem("editorData");
+    return savedData ? JSON.parse(savedData) : null;
+  };
+
+  //  Горячие  клавиши
+  useHotkeys("ctrl+r", () => {
+    inputValueTitle.getRef().focus();
+  }, {
+    enabled: () => true,
+    preventDefault: true,
+  });
+
+  useHotkeys("ctrl+f", () => {
+    searchState.getRef().focus();
+  }, {
+    enabled: () => true,
+    preventDefault: true,
+  });
+
+  //  Загрузка  сохраненного  содержимого  при  монтировании  компонента
   useEffect(() => {
+    const savedData = getSavedEditorData();
+    if (savedData) {
+      setEditorState(
+        EditorState.push(EditorState.createEmpty(), convertFromRaw(savedData))
+      );
+    }
+   
     let localValue = localStorage.getItem("login");
     if (localValue) {
       loginAuth.setLogin(localValue);
@@ -27,30 +80,6 @@ const App = observer(() => {
     }
   }, []);
 
-  const toggleLink = () => {
-    const selection = editorState.getSelection();
-    const linkURL = prompt("Введите URL ссылки:");
-    if (!linkURL) return;
-
-    const contentState = editorState.getCurrentContent();
-    const contentStateWithEntity = contentState.createEntity(
-      "LINK",
-      "MUTABLE",
-      { url: linkURL }
-    );
-    const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-    const newEditorState = EditorState.set(editorState, {
-      currentContent: contentStateWithEntity,
-    });
-    setEditorState(RichUtils.toggleLink(newEditorState, selection, entityKey));
-  };
-
-  const toggleInlineStyle = () => {
-    const style = typemethod.getValue; // Получаем текущее значение стиля
-    console.log(style)
-    setEditorState(RichUtils.toggleInlineStyle(editorState, style));
-  };
-
   if (!loginAuth.getLogin) {
     return <h1>Не авторизован</h1>;
   }
@@ -64,14 +93,14 @@ const App = observer(() => {
           className="MainText"
           onFocus={() => {
             const ref = inputValueTitle.getRef();
-            if (!inputValueTitle.getValue() && ref) {
+            if (inputValueTitle.getValue.length) {
               ref.focus();
             }
           }}
         >
           <Editor
             editorState={editorState}
-            onChange={setEditorState}
+            onChange={change}
             customStyleMap={{
               BOLD: { fontWeight: "bold" },
               UNDERLINE: { textDecoration: "underline" },
@@ -87,11 +116,16 @@ const App = observer(() => {
             }}
           />
         </div>
+        <button
+          onClick={() => {
+            toggleInlineStyle();
+          }}
+        >
+          Style
+        </button>
       </div>
-      {/* Пример кнопки для применения стиля */}
-      <button onClick={toggleInlineStyle}>Toggle Style</button>
     </div>
   );
-});
+};
 
 export default App;

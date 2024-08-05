@@ -12,10 +12,11 @@ class ActiveStateButton {
     }
 
     setActiveState(state) {
-        this.activeState = state // устанавливаем новое значение
+        if (state === this.activeState) return this.activeState = ''
+        this.activeState = state 
     }
 
-    get getValue() {
+    getValue() {
         return this.activeState
     }
 }
