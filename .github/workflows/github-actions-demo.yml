@@ -17,6 +17,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+
+      - name: Go project
+        run: cd ..
+
       - name: Install Modules
         run: npm i
 
