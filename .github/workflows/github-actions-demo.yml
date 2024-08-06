@@ -19,5 +19,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install Modules
         run: npm i
+
       - name: Build Project
         run: npm run build
+
+      - name: Finish
+        run: echo "Finifh bouild"
+
