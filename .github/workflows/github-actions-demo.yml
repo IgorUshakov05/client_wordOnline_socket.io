@@ -18,6 +18,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install Modules
-        run: npm install
+        run: npm i
       - name: Build Project
         run: npm run build
